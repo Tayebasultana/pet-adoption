@@ -7,7 +7,8 @@
     <!-- daisyUI -->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.12/dist/full.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
-    
+    <!-- font awsome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 </head>
 <body>
     <header>
@@ -43,5 +44,67 @@
            </div>
          </div>
     </header>
+
+    <main></main>
+
+    <footer>
+        <div class="py-14 px-5 md:px-10 lg:px-24 grid grid-cols-1 lg:grid-cols-3 items-center bg-black">
+          <!-- details div -->
+            <div>
+                <div class="flex text-white font-bold  items-center">
+                    <div class="w-5 h-5">
+                        <img src="images/logo.webp" alt="">
+                    </div>
+                    <div class="ml-2 text-2xl">
+                        <h3>Peddy</h3>
+                    </div>
+                </div>
+                <p class="text-slate-500">
+                   Location: av. Washington 165, NY CA 54003<br>
+                   Phone: +31 85 964 47 25<br>
+                   Email: info@yourdomain.com<br>
+                   Openings hours: 9.00 AM - 5.00 PM
+                </p>
+                <div class="flex mt-2">
+                    <div><i class="mr-4 fa-brands fa-facebook fa-xl" style="color: #4c9bd6;"></i></div>
+                    <div><i class="mr-4 fa-brands fa-x-twitter fa-xl"></i></div>
+                    <div><i class="mr-4 fa-brands fa-youtube fa-xl" style="color: #ff2424;"></i></div>
+                    <div><i class="fa-brands fa-instagram fa-xl" style="color: #B197FC;"></i></div>
+                </div>
+               </div>
+               <!--all links div -->
+               <div class="mt-10 lg:mt-0">
+                <h3 class="text-2xl text-white font-bold">Useful Links</h3>
+                <ul class="text-slate-500 list-none">
+                    <li><a href="">Home</a></li>
+                    <li><a href="">About Us</a></li>
+                    <li><a href="">Animals</a></li>
+                    <li><a href="">Foundation</a></li>
+                    <li><a href="">Contact</a></li>
+                </ul>
+               </div>
+               <!-- drop massage div -->
+               <div class="mt-10 lg:mt-0">
+                <h3 class="text-2xl text-white font-bold mb-4">Drop a Message</h3>
+                <label class="input input-bordered flex items-center gap-2">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 16 16"
+                      fill="currentColor"
+                      class="h-4 w-4 opacity-70">
+                      <path
+                        d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.755.755 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3h-11Z" />
+                      <path
+                        d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
+                    </svg>
+                    <input type="text" class="grow" placeholder="Enter Your Email" />
+                  </label>
+                  <button class="btn border-none rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-bold py-4 px-10 mt-2">
+                    Subscribe
+                  </button>
+
+               </div>
+           </div>
+    </footer>
 </body>
 </html>
