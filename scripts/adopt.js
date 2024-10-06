@@ -17,11 +17,22 @@ const loadCategories = () => {
         console.log(item);
     // create buttons
   const button = document.createElement("button");
-  button.classList = "btn bg-transparent border-violet-400 px-10 py-4";
-  button.innerText = item.category;
+  button.classList = "btn bg-transparent border-violet-400 ";
+  button.innerHTML = `
+  <img src="${item.category_icon}" alt="${item.category}" class="w-10 h-10 font-bold ">
+  <span class=" text-xl">${item.category}</span>
+`;
     // add button to categoryContainer
     categoryContainer.append(button);
     });
   }
 
 loadCategories();
+
+
+const viewMoreButton = document.getElementById("viewMoreButton");     
+const adoptSection = document.getElementById("adoptSection");
+
+viewMoreButton.addEventListener("click", function() {
+adoptSection.scrollIntoView({ behavior: "smooth" });
+});
