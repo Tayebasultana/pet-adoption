@@ -64,7 +64,24 @@
         </div>
         <!-- category button -->
         <div id="categoryButton" class="grid grid-cols-2 lg:grid-cols-4 gap-5 justify-center "></div>
+        <div id="adoptPet" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
        </div>
+
+       <!-- Open the modal using ID.showModal() method -->
+        <button class="btn hidden" onclick="my_modal_5.showModal()">open modal</button>
+        <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+          <div class="modal-box">
+            
+           <div id="modal-contant"></div>
+
+            <div class="modal-action">
+              <form method="dialog">
+                <!-- if there is a button in form, it will close the modal -->
+                <button class="btn  inline-block w-full">Cencel</button>
+              </form>
+            </div>
+          </div>
+        </dialog>
        
     </main>
 
