@@ -35,6 +35,16 @@ const loadDetails = async (petId) => {
   const data = await res.json();
   displayDetails(data.petData);
 }
+
+// load categories video
+const loadCategoriesVideos = (categoryName) => {
+
+fetch(`https://openapi.programming-hero.com/api/peddy/category/${categoryName}`)
+ .then((res) => res.json())
+ .then((data) => displayPets(data.data))
+ .catch((error) => console.log(error))
+}
+
 const displayDetails = (pet) => {
   console.log(pet);
   const detailContainer = document.getElementById("modal-contant")
@@ -63,12 +73,15 @@ detailContainer.innerHTML=
     <h2><strong>Details Information : </strong>${pet.pet_details}</h2>
     </div>
 `
-
   document.getElementById("my_modal_5").showModal();
 }
 
+
+
 const displayPets = (pets) => {
 const allPetContainer = document.getElementById("adoptPet");
+
+allPetContainer.innerHTML = '';
 
 pets.forEach((pet) => {
   console.log(pet);
@@ -103,6 +116,8 @@ pets.forEach((pet) => {
 })
 }
 
+
+
 // create displayCategories
   const displayCategories = (categories) => {
    const categoryContainer = document.getElementById("categoryButton");
@@ -110,14 +125,17 @@ pets.forEach((pet) => {
     categories.forEach((item) => {
         console.log(item);
     // create buttons
-  const button = document.createElement("button");
-  button.classList = "btn bg-transparent border-violet-400 ";
-  button.innerHTML = `
-  <img src="${item.category_icon}" alt="${item.category}" class="w-10 h-10 font-bold ">
-  <span class=" text-xl">${item.category}</span>
-`;
+  const buttoncontainer = document.createElement("div");
+  buttoncontainer.innerHTML=
+  `
+  <button onclick="loadCategoriesVideos('${item.category}')" class="btn bg-transparent border-violet-400">
+
+   <img src="${item.category_icon}" alt="${item.category}" class="w-10 h-10 font-bold">
+   <span class="text-xl">${item.category}</span> 
+  </button>
+  `;
     // add button to categoryContainer
-    categoryContainer.append(button);
+    categoryContainer.append(buttoncontainer);
     });
   }
 
