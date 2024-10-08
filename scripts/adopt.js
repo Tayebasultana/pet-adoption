@@ -1,3 +1,4 @@
+
 // make connection between view button to adopt section
 const viewMoreButton = document.getElementById("viewMoreButton");     
 const adoptSection = document.getElementById("adoptSection");
@@ -48,7 +49,7 @@ fetch(`https://openapi.programming-hero.com/api/peddy/category/${categoryName}`)
 const displayDetails = (pet) => {
   console.log(pet);
   const detailContainer = document.getElementById("modal-contant")
-
+// make modal contant here
 detailContainer.innerHTML=
 `
 <div class="card border-2 rounded-xl ">
@@ -77,7 +78,6 @@ detailContainer.innerHTML=
 }
 
 
-
 const displayPets = (pets) => {
 const allPetContainer = document.getElementById("adoptPet");
 
@@ -86,9 +86,10 @@ allPetContainer.innerHTML = '';
 if(pets.length === 0){
   // remove grid
   allPetContainer.classList.remove("grid");
+  // if there is no data available show this 
   allPetContainer.innerHTML = `
-  <div class="bg-gray-200 rounded-xl text-center sm:px-0 py-0 gap-0 md md:px-10 py-7 lg:px-10 py-7">
-   <img src="images/error.webp" alt="" class="mx-auto">
+  <div class="bg-gray-200 rounded-xl text-center sm:px-0 gap-0 md md:px-10 lg:px-10 py-7">
+   <img src="images/error.webp" alt="" class="mx-auto w-100%">
    <h2 class="text-black font-bold text-2xl sm:my-2 md:my-4 lg:my-4">No Information Available</h2>
    <p class="sm:w-auto md:w-auto lg:w-6/12 mx-auto">It is a long established fact that a reader will be distracted by the readable content of a page when looking at 
       its layout. The point of using Lorem Ipsum is that it has a.</p>
@@ -104,6 +105,7 @@ else{
 pets.forEach((pet) => {
   console.log(pet);
   const card = document.createElement("div");
+  // card for all pets
   card.innerHTML=
   `
   <div class="card border-2 rounded-xl w-96">
@@ -123,14 +125,21 @@ pets.forEach((pet) => {
     <div class="divider"></div>
     
     <div class="card-actions justify-between">
-    <button class="btn btn-primary text-xl font-bold text-teal-600 bg-transparent border-violet-400"><i class="fa-solid fa-thumbs-up"></i></button>
-      <button class="btn btn-primary text-xl font-bold text-teal-600 bg-transparent border-violet-400">Adopt</button>
-      <button onclick="loadDetails(${pet.petId})" class="btn btn-primary text-xl font-bold text-teal-600 bg-transparent border-violet-400">Details</button>
+    <button class="btn btn-primary text-xl font-bold text-teal-600 bg-transparent border-violet-400 hover:bg-teal-600 hover:text-white hover:border-transparent"><i class="fa-solid fa-thumbs-up"></i></button>
+      <button id="adoptButton-${pet.petId}" onclick="handleSearch(${pet.petId})" class="btn btn-primary text-xl font-bold text-teal-600 bg-transparent border-violet-400 hover:bg-teal-600 hover:text-white hover:border-transparent">Adopt</button>
+      <button onclick="loadDetails(${pet.petId})" class="btn btn-primary text-xl font-bold text-teal-600 bg-transparent border-violet-400 hover:bg-teal-600 hover:text-white hover:border-transparent">Details</button>
     </div>
   </div>
 </div>
   `;
   allPetContainer.append(card);
+  //  show the adoption
+  const adoptButton = document.getElementById(`adoptButton-${pet.petId}`);
+  adoptButton.addEventListener("click", () => {
+    const modal = document.getElementById("my_modal_2"); 
+    modal.showModal(); 
+  });
+
 })
 }
 
@@ -146,16 +155,62 @@ pets.forEach((pet) => {
   const buttoncontainer = document.createElement("div");
   buttoncontainer.innerHTML=
   `
-  <button onclick="loadCategoriesVideos('${item.category}')" class="btn bg-transparent border-violet-400">
-
+  <button id="btn-${item.id}" onclick="loadCategoriesVideos('${item.category}')" class="btn category-btn bg-transparent border-violet-400">
+   
    <img src="${item.category_icon}" alt="${item.category}" class="w-10 h-10 font-bold">
    <span class="text-xl">${item.category}</span> 
   </button>
-  `;
+  `; 
     // add button to categoryContainer
     categoryContainer.append(buttoncontainer);
     });
   }
+
+
+  // adoption modal
+  function openModal() {
+    const modal = document.getElementById("my_modal_2");
+    modal.showModal(); 
+  }
+
+  
+const loading = (petId) => {
+
+  document.getElementById("countDown").style.display="none";
+
+  const modal = document.getElementById("my_modal_2"); // Assuming the modal has this ID
+  modal.close(); // Close the modal
+
+  const currentAdoptButton = document.querySelector(`#adoptButton-${petId}`);
+  if (currentAdoptButton) {
+    console.log(currentAdoptButton);
+    currentAdoptButton.disabled = true; // Disable the button
+    currentAdoptButton.classList.add('opacity-50', 'cursor-not-allowed'); // Optionally add styles to show it's disabled
+    currentAdoptButton.textContent = "Adopted";
+  }
+}
+
+const handleSearch = (petId) => {
+  currentPetId = petId; // Store the pet ID for use in the loading function
+  counter = 3; // Reset the counter to 3
+  const countdownElement = document.getElementById("countDown");
+  countdownElement.style.display = "block"; // Show countdown
+  countdownElement.innerHTML = `<span style="font-size: 3rem; font-weight: bold;">${counter}</span>`; // Display the initial counter
+
+  countdownInterval = setInterval(() => {
+    counter--; // Decrease the counter value
+    countdownElement.innerHTML = `<span style="font-size: 3rem; font-weight: bold;">${counter}</span>`; // Update the countdown text
+
+    // When the countdown reaches 0, stop the interval
+    if (counter <= 0) {
+      clearInterval(countdownInterval); // Stop the interval
+      loading(petId); // Call the loading function
+    }
+  }, 1000); // Interval set to 1 second (1000ms)
+};
+
+
+
 
 loadCategories();
 loadPets();

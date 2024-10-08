@@ -9,6 +9,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- font awsome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <!-- link with css file -->
+     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
@@ -64,10 +66,18 @@
         </div>
         <!-- category button -->
         <div id="categoryButton" class="grid grid-cols-2 lg:grid-cols-4 gap-5 justify-items-center"></div>
-        <div id="adoptPet" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+        <div class="flex justify-between py-10">
+          <div><h2 class="font-bold text-black text-2xl">Best Deal For you</h2></div>
+          <div><button class="btn bg-teal-600 text-white text-xl">Sort by Price</button></div>
+        </div>
+        <!-- all pets -->
+        <div class="flex gap-10">
+          <div id="adoptPet" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+          <div class="border-2 rounded-xl flex-1 p-7"></div>
+        </div>
        </div>
-
-       <!-- Open the modal using ID.showModal() method -->
+             
+       <!-- Open the modal using ID.showModal() method --> 
         <button class="btn hidden" onclick="my_modal_5.showModal()">open modal</button>
         <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
           <div class="modal-box">
@@ -82,6 +92,20 @@
             </div>
           </div>
         </dialog>
+
+        <!-- this modal for adopt button -->
+         <!-- Open the modal using ID.showModal() method -->
+         <button class="btn " onclick="openModal()">Adopt</button>
+            <dialog id="my_modal_2" class="modal modal-bottom sm:modal-middle">
+              <div class="modal-box text-center">
+                <img src="images/handshake.png" alt="" class="w-40 h-40 mx-auto">
+                <h3 class="text-3xl font-bold">Congrates!</h3>
+                <p class="py-4 font-bold">Adoption Process Is Start For Your Pet</p>
+                <div id="countDown">
+                  <h2 class="text-4xl font-bold text-black">3</h2>
+                </div>
+              </div>
+            </dialog>
        
     </main>
 
@@ -124,7 +148,7 @@
                <!-- drop massage div -->
                <div class="mt-10 lg:mt-0">
                 <h3 class="text-2xl text-white font-bold mb-4">Drop a Message</h3>
-                <label class="input input-bordered flex items-center gap-2">
+                <label class="input input-bordered flex items-center gap-2 w-full">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 16 16"
@@ -137,7 +161,7 @@
                     </svg>
                     <input type="text" class="grow" placeholder="Enter Your Email" />
                   </label>
-                  <button class="btn border-none rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-bold py-4 px-10 mt-2">
+                  <button class="btn border-none rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-bold py-4 px-10 mt-2 w-full">
                     Subscribe
                   </button>
 
