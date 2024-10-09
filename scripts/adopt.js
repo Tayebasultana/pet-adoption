@@ -40,7 +40,7 @@ const loadPets = () => {
 
 // Function to sort pets by price
 const sortPetsByPrice = (pets) => {
-  return pets.sort((a, b) => a.price - b.price); 
+  return pets.sort((a, b) => b.price - a.price); 
 };
 // Sort button click event
 document.getElementById("sort-by-price").addEventListener("click", () => {
@@ -141,7 +141,15 @@ pets.forEach((pet) => {
   console.log(pet);
   const card = document.createElement("div");
   // for undefined or null value i need to show "not available"
-  pet.breed ? pet.breed : "Not Available";
+
+  // 1)pet.breed ? pet.breed : "Not Available";
+  // 2)pet.breed && pet.breed.trim() !== "" ? pet.breed : "Not Available";
+  // 3)let breed;
+  // if (pet.breed !== undefined && pet.breed.trim() !== "") {
+  //   breed = pet.breed;
+  // } else {
+  //   breed = "Not Available";
+  // }
   
 
   // card for all pets
