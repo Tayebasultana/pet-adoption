@@ -108,7 +108,7 @@ pets.forEach((pet) => {
   // card for all pets
   card.innerHTML=
   `
-  <div class="card border-2 rounded-xl w-96">
+  <div class="card border-2 rounded-xl w-80">
   <figure class="h-[220px] px-5 pt-5">
     <img
       src=${pet.image}
@@ -125,14 +125,29 @@ pets.forEach((pet) => {
     <div class="divider"></div>
     
     <div class="card-actions justify-between">
-    <button class="btn btn-primary text-xl font-bold text-teal-600 bg-transparent border-violet-400 hover:bg-teal-600 hover:text-white hover:border-transparent"><i class="fa-solid fa-thumbs-up"></i></button>
-      <button id="adoptButton-${pet.petId}" onclick="handleSearch(${pet.petId})" class="btn btn-primary text-xl font-bold text-teal-600 bg-transparent border-violet-400 hover:bg-teal-600 hover:text-white hover:border-transparent">Adopt</button>
-      <button onclick="loadDetails(${pet.petId})" class="btn btn-primary text-xl font-bold text-teal-600 bg-transparent border-violet-400 hover:bg-teal-600 hover:text-white hover:border-transparent">Details</button>
+    <button class="like-btn btn btn-primary text-lg font-bold text-teal-600 bg-transparent border-violet-400 hover:bg-teal-600 hover:text-white hover:border-transparent"><i class="fa-solid fa-thumbs-up"></i></button>
+      <button id="adoptButton-${pet.petId}" onclick="handleSearch(${pet.petId})" class="btn btn-primary text-lg font-bold text-teal-600 bg-transparent border-violet-400 hover:bg-teal-600 hover:text-white hover:border-transparent">Adopt</button>
+      <button onclick="loadDetails(${pet.petId})" class="btn btn-primary text-lg font-bold text-teal-600 bg-transparent border-violet-400 hover:bg-teal-600 hover:text-white hover:border-transparent">Details</button>
     </div>
   </div>
 </div>
   `;
   allPetContainer.append(card);
+
+  const likeButton = card.querySelector('.like-btn');
+  likeButton.addEventListener('click', function() {
+    const petImage = (`${pet.image}`); 
+   const card2 = document.createElement("div")
+   card2.innerHTML=
+   `
+   <div class="w-32 gap-4 mb-2 ">
+      <img src="${petImage}" alt="Favorite Pet" class="w-full h-auto object-cover">
+    </div>
+   `;
+   const likeDiv = document.getElementById('like-pet');
+  likeDiv.appendChild(card2); 
+  });
+
   //  show the adoption
   const adoptButton = document.getElementById(`adoptButton-${pet.petId}`);
   adoptButton.addEventListener("click", () => {
@@ -167,49 +182,48 @@ pets.forEach((pet) => {
   }
 
 
+
   // adoption modal
   function openModal() {
     const modal = document.getElementById("my_modal_2");
     modal.showModal(); 
   }
 
-  
 const loading = (petId) => {
-
   document.getElementById("countDown").style.display="none";
-
-  const modal = document.getElementById("my_modal_2"); // Assuming the modal has this ID
-  modal.close(); // Close the modal
+  const modal = document.getElementById("my_modal_2"); 
+  modal.close(); 
 
   const currentAdoptButton = document.querySelector(`#adoptButton-${petId}`);
   if (currentAdoptButton) {
     console.log(currentAdoptButton);
-    currentAdoptButton.disabled = true; // Disable the button
-    currentAdoptButton.classList.add('opacity-50', 'cursor-not-allowed'); // Optionally add styles to show it's disabled
+    // Disable the button
+    currentAdoptButton.disabled = true; 
+    currentAdoptButton.classList.add('opacity-50', 'cursor-not-allowed'); 
     currentAdoptButton.textContent = "Adopted";
   }
 }
 
+
+
 const handleSearch = (petId) => {
-  currentPetId = petId; // Store the pet ID for use in the loading function
-  counter = 3; // Reset the counter to 3
+  currentPetId = petId; 
+  counter = 3; 
   const countdownElement = document.getElementById("countDown");
-  countdownElement.style.display = "block"; // Show countdown
-  countdownElement.innerHTML = `<span style="font-size: 3rem; font-weight: bold;">${counter}</span>`; // Display the initial counter
+  countdownElement.style.display = "block"; 
+  countdownElement.innerHTML = `<span style="font-size: 3rem; font-weight: bold;">${counter}</span>`; 
 
   countdownInterval = setInterval(() => {
-    counter--; // Decrease the counter value
-    countdownElement.innerHTML = `<span style="font-size: 3rem; font-weight: bold;">${counter}</span>`; // Update the countdown text
+    counter--; 
+    countdownElement.innerHTML = `<span style="font-size: 3rem; font-weight: bold;">${counter}</span>`; 
 
-    // When the countdown reaches 0, stop the interval
+    
     if (counter <= 0) {
-      clearInterval(countdownInterval); // Stop the interval
-      loading(petId); // Call the loading function
+      clearInterval(countdownInterval); 
+      loading(petId); 
     }
-  }, 1000); // Interval set to 1 second (1000ms)
+  }, 1000); 
 };
-
-
 
 
 loadCategories();

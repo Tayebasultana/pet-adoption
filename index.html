@@ -71,12 +71,19 @@
           <div><button class="btn bg-teal-600 text-white text-xl">Sort by Price</button></div>
         </div>
         <!-- all pets -->
-        <div class="flex gap-10">
-          <div id="adoptPet" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
-          <div class="border-2 rounded-xl flex-1 p-7"></div>
+
+        <div class="grid sm:grid-cols-1 md:grid-cols-2  lg:grid-cols-4 gap-5">
+          <div class="col-span-3">
+            <div id="adoptPet" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+          </div>
+          <div class="col-span-1 md:col-span-2 lg:col-span-1 border-2 rounded-xl p-7">
+            <div id="like-pet" class="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-2"></div>
+          </div>
         </div>
-       </div>
-             
+        
+
+
+
        <!-- Open the modal using ID.showModal() method --> 
         <button class="btn hidden" onclick="my_modal_5.showModal()">open modal</button>
         <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
@@ -95,14 +102,14 @@
 
         <!-- this modal for adopt button -->
          <!-- Open the modal using ID.showModal() method -->
-         <button class="btn " onclick="openModal()">Adopt</button>
+         <button class="btn hidden" onclick="openModal()">Adopt</button>
             <dialog id="my_modal_2" class="modal modal-bottom sm:modal-middle">
               <div class="modal-box text-center">
                 <img src="images/handshake.png" alt="" class="w-40 h-40 mx-auto">
                 <h3 class="text-3xl font-bold">Congrates!</h3>
                 <p class="py-4 font-bold">Adoption Process Is Start For Your Pet</p>
                 <div id="countDown">
-                  <h2 class="text-4xl font-bold text-black">3</h2>
+                  <h2 class=" font-bold text-black">3</h2>
                 </div>
               </div>
             </dialog>
