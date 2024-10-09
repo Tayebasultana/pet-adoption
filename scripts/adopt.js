@@ -7,6 +7,16 @@ viewMoreButton.addEventListener("click", function() {
 adoptSection.scrollIntoView({ behavior: "smooth" });
 });
 
+// this function for remove all category buttons active class
+const removeActiveClass = () => {
+const buttons = document.getElementsByClassName("category-btn")
+console.log(buttons);
+for(let btn of buttons){
+  btn.classList.remove("active");
+}
+
+}
+
 
 //1- fetch, load and show catagories in html
 
@@ -28,6 +38,23 @@ const loadPets = () => {
  .catch((error) => console.log(error))
 }
 
+// Function to sort pets by price
+const sortPetsByPrice = (pets) => {
+  return pets.sort((a, b) => a.price - b.price); 
+};
+// Sort button click event
+document.getElementById("sort-by-price").addEventListener("click", () => {
+  // Fetch pets again
+  fetch("https://openapi.programming-hero.com/api/peddy/pets")
+      .then((res) => res.json())
+      .then((data) => {
+          const sortedPets = sortPetsByPrice(data.pets);
+          displayPets(sortedPets); 
+      })
+      .catch((error) => console.log(error));
+});
+
+
 // load details
 const loadDetails = async (petId) => {
   console.log(petId);
@@ -37,12 +64,20 @@ const loadDetails = async (petId) => {
   displayDetails(data.petData);
 }
 
-// load categories video
-const loadCategoriesVideos = (categoryName) => {
+
+// load categories pet
+const loadCategoriesPet = (categoryName) => {
 
 fetch(`https://openapi.programming-hero.com/api/peddy/category/${categoryName}`)
  .then((res) => res.json())
- .then((data) => displayPets(data.data))
+ .then((data) => {
+  // remove active class from all button
+  removeActiveClass()
+  // add active class in specific id
+  const activeBtn = document.getElementById(`btn-${categoryName}`)
+  activeBtn.classList.add("active");
+  displayPets(data.data)
+ })
  .catch((error) => console.log(error))
 }
 
@@ -53,7 +88,7 @@ const displayDetails = (pet) => {
 detailContainer.innerHTML=
 `
 <div class="card border-2 rounded-xl ">
-  <figure class="h-[220px] px-5 pt-5">
+  <figure class="h-[260px] px-5 pt-5">
     <img
       src=${pet.image}
       alt="Shoes"
@@ -105,6 +140,10 @@ else{
 pets.forEach((pet) => {
   console.log(pet);
   const card = document.createElement("div");
+  // for undefined or null value i need to show "not available"
+  pet.breed ? pet.breed : "Not Available";
+  
+
   // card for all pets
   card.innerHTML=
   `
@@ -126,22 +165,25 @@ pets.forEach((pet) => {
     
     <div class="card-actions justify-between">
     <button class="like-btn btn btn-primary text-lg font-bold text-teal-600 bg-transparent border-violet-400 hover:bg-teal-600 hover:text-white hover:border-transparent"><i class="fa-solid fa-thumbs-up"></i></button>
-      <button id="adoptButton-${pet.petId}" onclick="handleSearch(${pet.petId})" class="btn btn-primary text-lg font-bold text-teal-600 bg-transparent border-violet-400 hover:bg-teal-600 hover:text-white hover:border-transparent">Adopt</button>
-      <button onclick="loadDetails(${pet.petId})" class="btn btn-primary text-lg font-bold text-teal-600 bg-transparent border-violet-400 hover:bg-teal-600 hover:text-white hover:border-transparent">Details</button>
+      <button id="adoptButton-${pet.petId}" onclick="handleSearch(${pet.petId})" class="btn btn-primary text-base font-bold text-teal-600 bg-transparent border-violet-400 hover:bg-teal-600 hover:text-white hover:border-transparent">Adopt</button>
+      <button onclick="loadDetails(${pet.petId})" class="btn btn-primary text-base font-bold text-teal-600 bg-transparent border-violet-400 hover:bg-teal-600 hover:text-white hover:border-transparent">Details</button>
     </div>
   </div>
 </div>
   `;
   allPetContainer.append(card);
 
+  // like button functionality
   const likeButton = card.querySelector('.like-btn');
   likeButton.addEventListener('click', function() {
     const petImage = (`${pet.image}`); 
    const card2 = document.createElement("div")
    card2.innerHTML=
    `
-   <div class="w-32 gap-4 mb-2 ">
-      <img src="${petImage}" alt="Favorite Pet" class="w-full h-auto object-cover">
+   <div class="w-36 p-2 border-2 rounded-xl gap-4 mb-2 ">
+      <div>
+      <img src="${petImage}" alt="Favorite Pet" class="w-full h-auto object-cover rounded-lg">
+      </div>
     </div>
    `;
    const likeDiv = document.getElementById('like-pet');
@@ -167,19 +209,20 @@ pets.forEach((pet) => {
     categories.forEach((item) => {
         console.log(item);
     // create buttons
-  const buttoncontainer = document.createElement("div");
-  buttoncontainer.innerHTML=
-  `
-  <button id="btn-${item.id}" onclick="loadCategoriesVideos('${item.category}')" class="btn category-btn bg-transparent border-violet-400">
-   
-   <img src="${item.category_icon}" alt="${item.category}" class="w-10 h-10 font-bold">
-   <span class="text-xl">${item.category}</span> 
-  </button>
-  `; 
+    const buttoncontainer = document.createElement("div");
+    buttoncontainer.innerHTML = `
+        <button id="btn-${item.category}" onclick="loadCategoriesPet('${item.category}', this)" class="btn category-btn bg-transparent border-violet-400">
+            <img src="${item.category_icon}" alt="${item.category}" class="w-10 h-10 font-bold">
+            <span class="text-xl">${item.category}</span> 
+        </button>
+    `; 
+    
     // add button to categoryContainer
     categoryContainer.append(buttoncontainer);
     });
   }
+
+  
 
 
 
@@ -224,6 +267,7 @@ const handleSearch = (petId) => {
     }
   }, 1000); 
 };
+
 
 
 loadCategories();

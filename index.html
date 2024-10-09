@@ -68,16 +68,16 @@
         <div id="categoryButton" class="grid grid-cols-2 lg:grid-cols-4 gap-5 justify-items-center"></div>
         <div class="flex justify-between py-10">
           <div><h2 class="font-bold text-black text-2xl">Best Deal For you</h2></div>
-          <div><button class="btn bg-teal-600 text-white text-xl">Sort by Price</button></div>
+          <div><button id="sort-by-price" class="btn bg-teal-600 text-white text-xl">Sort by Price</button></div>
         </div>
         <!-- all pets -->
 
-        <div class="grid sm:grid-cols-1 md:grid-cols-2  lg:grid-cols-4 gap-5">
+        <div class="grid sm:grid-cols-1 md:grid-cols-2  lg:grid-cols-4 gap-5 justify-items-center md:justify-items-center lg:justify-items-start">
           <div class="col-span-3">
             <div id="adoptPet" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
           </div>
-          <div class="col-span-1 md:col-span-2 lg:col-span-1 border-2 rounded-xl p-7">
-            <div id="like-pet" class="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-2"></div>
+          <div class="col-span-1 md:col-span-2 lg:col-span-1 border-2 rounded-xl p-3">
+            <div id="like-pet" class="grid gap-5 grid-cols-2 md:grid-cols-4 lg:grid-cols-2"></div>
           </div>
         </div>
         
@@ -91,10 +91,10 @@
             
            <div id="modal-contant"></div>
 
-            <div class="modal-action">
+            <div class="modal-action justify-center ">
               <form method="dialog">
                 <!-- if there is a button in form, it will close the modal -->
-                <button class="btn">Cencel</button>
+                <button class="btn px-14 text-xl">Cencel</button>
               </form>
             </div>
           </div>
