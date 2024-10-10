@@ -86,7 +86,7 @@ const loadDetails = async (petId) => {
 
 // load categories pet
 const loadCategoriesPet = (categoryName) => {
-
+showSpinner()
 fetch(`https://openapi.programming-hero.com/api/peddy/category/${categoryName}`)
  .then((res) => res.json())
  .then((data) => {
@@ -95,7 +95,10 @@ fetch(`https://openapi.programming-hero.com/api/peddy/category/${categoryName}`)
   // add active class in specific id
   const activeBtn = document.getElementById(`btn-${categoryName}`)
   activeBtn.classList.add("active");
-  displayPets(data.data)
+  setTimeout(() => {
+    displayPets(data.data)
+    hideSpinner()
+  }, 2000);
  })
  .catch((error) => console.log(error));
 }
