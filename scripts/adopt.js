@@ -78,7 +78,7 @@ fetch(`https://openapi.programming-hero.com/api/peddy/category/${categoryName}`)
   activeBtn.classList.add("active");
   displayPets(data.data)
  })
- .catch((error) => console.log(error))
+ .catch((error) => console.log(error));
 }
 
 const displayDetails = (pet) => {
@@ -140,18 +140,7 @@ else{
 pets.forEach((pet) => {
   console.log(pet);
   const card = document.createElement("div");
-  // for undefined or null value i need to show "not available"
-
-  // 1)pet.breed ? pet.breed : "Not Available";
-  // 2)pet.breed && pet.breed.trim() !== "" ? pet.breed : "Not Available";
-  // 3)let breed;
-  // if (pet.breed !== undefined && pet.breed.trim() !== "") {
-  //   breed = pet.breed;
-  // } else {
-  //   breed = "Not Available";
-  // }
   
-
   // card for all pets
   card.innerHTML=
   `
@@ -164,10 +153,11 @@ pets.forEach((pet) => {
   </figure>
   <div class="card-body">
     <h2 class="font-bold text-2xl ">${pet.pet_name}</h2>
-    <p><i class="fas fa-paw"></i>  <strong>Breed : </strong>${pet.breed}</p>
-    <p><i class="fa-solid fa-calendar-days fa-sm"></i>  <strong>Birth : </strong>${pet.date_of_birth}</p>
-    <p> <i class="fas ${pet.gender === 'Male' ? 'fa-mars' : 'fa-venus'}"></i>  <strong>Gender : </strong>${pet.gender}</p>
-    <p><i class="fa-solid fa-circle-dollar-to-slot fa-sm"></i>  <strong>Price : </strong>${pet.price}</p>
+    <p><i class="fas fa-paw"></i>  <strong>Breed : </strong>${pet.breed ? pet.breed : 'Not Available'}</p>
+
+    <p><i class="fa-solid fa-calendar-days fa-sm"></i>  <strong>Birth : </strong>${pet.date_of_birth ? pet.date_of_birth : 'Not Available'}</p>
+    <p> <i class="fas ${pet.gender === 'Male' ? 'fa-mars' : 'fa-venus'}"></i>  <strong>Gender : </strong>${pet.gender ? pet.gender : 'Not Available'}</p>
+    <p><i class="fa-solid fa-circle-dollar-to-slot fa-sm"></i>  <strong>Price : </strong>${pet.price ? pet.price : 'Not Available'}</p>
 
     <div class="divider"></div>
     
