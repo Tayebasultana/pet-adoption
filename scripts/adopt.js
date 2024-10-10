@@ -20,6 +20,16 @@ for(let btn of buttons){
 
 //1- fetch, load and show catagories in html
 
+const showSpinner = () => {
+  const spinner = document.getElementById("loadingSpinner");
+  spinner.style.display = "flex"; // Show the spinner
+};
+
+const hideSpinner = () => {
+  const spinner = document.getElementById("loadingSpinner");
+  spinner.style.display = "none"; // Hide the spinner
+};
+
 // create loadCategories
 const loadCategories = () => {
     // fetch the data
@@ -31,11 +41,20 @@ const loadCategories = () => {
 
 // create loadPets
 const loadPets = () => {
+  showSpinner()
   // fetch the data
  fetch("https://openapi.programming-hero.com/api/peddy/pets")
  .then((res) => res.json())
- .then((data) => displayPets(data.pets))
- .catch((error) => console.log(error))
+ .then((data) => {
+  setTimeout(() => {
+    displayPets(data.pets)
+    hideSpinner()
+  }, 2000);
+ })
+ .catch((error) => {
+  console.log(error)
+  hideSpinner()
+ })
 }
 
 // Function to sort pets by price
