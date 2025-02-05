@@ -29,10 +29,7 @@
    - This step installs all necessary libraries or dependencies the project requires, which are listed in `package.json`.
 
 4. **Run the Project**:  
-   - This is the step where you start the application. Once you run the `npm start` command, the application will start a local development server.
-
-5. **Troubleshooting**:  
-   - This section helps in case there are any issues with setting up the project or running it. It guides users on how to resolve common setup problems.
+   - This is the step where you start the application. Once you run the `npm run dev` command, the application will start a local development server.
 
 You can also modify the guide based on your project's specific needs, such as changing commands or adding more setup steps if required.
 
